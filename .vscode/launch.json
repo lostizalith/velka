@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - VelkaApplication",
+            "request": "launch",
+            "mainClass": "com.github.lostizalith.velka.VelkaApplication",
+            "projectName": "velka"
+        }
+    ]
+}
