@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "velka",
+                "projectName": "velka",
+                "workingDirectory": "/Users/solairerove/workspace/solairerove/velka",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "velka",
+                "projectName": "velka",
+                "workingDirectory": "/Users/solairerove/workspace/solairerove/velka",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
