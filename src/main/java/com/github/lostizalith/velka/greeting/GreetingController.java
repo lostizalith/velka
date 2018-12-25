@@ -1,4 +1,4 @@
-package com.github.lostizalith.velka;
+package com.github.lostizalith.velka.greeting;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
