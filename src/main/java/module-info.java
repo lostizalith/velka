@@ -12,6 +12,7 @@ open module velka {
     requires spring.boot.autoconfigure;
     requires spring.context;
     requires spring.core;
+    requires static lombok;
 
     requires spring.web;
     requires spring.webmvc;
