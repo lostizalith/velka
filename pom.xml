@@ -27,6 +27,7 @@
         <maven-failsafe.version>3.0.0-M3</maven-failsafe.version>
         <maven-jar.version>3.1.1</maven-jar.version>
         <maven-dependency.version>3.1.1</maven-dependency.version>
+        <exec-maven.version>1.6.0</exec-maven.version>
     </properties>
 
     <dependencies>
@@ -34,12 +35,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.projectlombok</groupId>-->
+            <!--<artifactId>lombok</artifactId>-->
+            <!--<version>${lombok.version}</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
         <!-- Test scope -->
         <dependency>
@@ -115,6 +116,38 @@
                             <outputDirectory>${project.build.directory}/modules</outputDirectory>
                             <includeScope>runtime</includeScope>
                             <excludeArtifactIds>spring-boot-devtools</excludeArtifactIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec-maven.version}</version>
+                <executions>
+                    <execution>
+                        <id>module-main-class</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>jar</executable>
+                            <arguments>
+                                <argument>
+                                    --update
+                                </argument>
+                                <argument>
+                                    --file=${project.build.directory}/modules/${project.build.finalName}.jar
+                                </argument>
+                                <argument>
+                                    --main-class=com.github.lostizalith.velka.VelkaApplication
+                                </argument>
+                                <argument>
+                                    --module-version=${project.version}
+                                </argument>
+                            </arguments>
                         </configuration>
                     </execution>
                 </executions>
