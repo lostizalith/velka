@@ -14,15 +14,15 @@ public class DefaultAccountService implements AccountService {
         accountEntity.setDisplayName("Prior Bank");
         accountEntity.setShortDescription("My super debit card");
         accountEntity.setAccountType(AccountType.DEBIT_CARD);
-        accountEntity.setCurrentBalance("100.00");
-        accountEntity.setCurrency("BYN");
+        accountEntity.setCurrentBalance(100.10);
+        accountEntity.setCurrency(AccountCurrency.BYN);
 
         final AccountEntity anotherAccountEntity = new AccountEntity();
         anotherAccountEntity.setDisplayName("Cash savings EUR");
         anotherAccountEntity.setShortDescription("My cash saving in eur");
         anotherAccountEntity.setAccountType(AccountType.CASH);
-        anotherAccountEntity.setCurrentBalance("400.00");
-        anotherAccountEntity.setCurrency("EUR");
+        anotherAccountEntity.setCurrentBalance(400.00);
+        anotherAccountEntity.setCurrency(AccountCurrency.EUR);
 
         return Arrays.asList(accountEntity, anotherAccountEntity);
     }

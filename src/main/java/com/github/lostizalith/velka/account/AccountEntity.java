@@ -15,11 +15,9 @@ public class AccountEntity {
 
     private AccountType accountType;
 
-    // TODO: what type (float?)
-    private String currentBalance;
+    private Double currentBalance;
 
-    // TODO: enum?
-    private String currency;
+    private AccountCurrency currency;
 
     // TODO: CashFlow?
 
