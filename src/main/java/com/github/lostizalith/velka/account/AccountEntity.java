@@ -13,8 +13,7 @@ public class AccountEntity {
 
     private String shortDescription;
 
-    // TODO: enum?
-    private String accountType;
+    private AccountType accountType;
 
     // TODO: what type (float?)
     private String currentBalance;
