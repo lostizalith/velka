@@ -1,15 +1,15 @@
 package com.github.lostizalith.velka.record;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/records", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
