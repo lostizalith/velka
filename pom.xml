@@ -16,7 +16,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <name>velka</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Financial Budget Instrument</description>
 
     <properties>
         <java.version>11</java.version>
@@ -24,15 +24,9 @@
         <!-- dependencies -->
         <lombok.version>1.18.4</lombok.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
-        <maven-compiler.version>3.8.0</maven-compiler.version>
 
         <!-- plugins -->
-        <asm.version>7.0</asm.version>
-        <maven-surefire.version>3.0.0-M3</maven-surefire.version>
-        <maven-failsafe.version>3.0.0-M3</maven-failsafe.version>
-        <maven-jar.version>3.1.1</maven-jar.version>
-        <maven-dependency.version>3.1.1</maven-dependency.version>
-        <exec-maven.version>1.6.0</exec-maven.version>
+        <maven-compiler.version>3.8.0</maven-compiler.version>
     </properties>
 
     <dependencies>
@@ -75,108 +69,7 @@
                 <version>${maven-compiler.version}</version>
                 <configuration>
                     <release>${java.version}</release>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
-                    <!-- this helps when getting error: file should be on source path, or on patch path for module -->
-                    <compilerArgs>
-                        <arg>-sourcepath</arg>
-                        <arg>
-                            ${project.basedir}/src/main/java${path.separator}${project.basedir}/target/generated-sources/annotations${path.separator}/
-                        </arg>
-                    </compilerArgs>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.ow2.asm</groupId>
-                        <artifactId>asm</artifactId>
-                        <version>${asm.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire.version}</version>
-                <configuration>
-                    <argLine>--illegal-access=permit</argLine>
-                    <forkCount>0</forkCount>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${maven-failsafe.version}</version>
-                <configuration>
-                    <argLine>--illegal-access=permit</argLine>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven-jar.version}</version>
-                <configuration>
-                    <outputDirectory>
-                        ${project.build.directory}/modules
-                    </outputDirectory>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven-dependency.version}</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/modules</outputDirectory>
-                            <includeScope>runtime</includeScope>
-                            <excludeArtifactIds>spring-boot-devtools</excludeArtifactIds>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>${exec-maven.version}</version>
-                <executions>
-                    <execution>
-                        <id>module-main-class</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>jar</executable>
-                            <arguments>
-                                <argument>
-                                    --update
-                                </argument>
-                                <argument>
-                                    --file=${project.build.directory}/modules/${project.build.finalName}.jar
-                                </argument>
-                                <argument>
-                                    --main-class=com.github.lostizalith.velka.VelkaApplication
-                                </argument>
-                                <argument>
-                                    --module-version=${project.version}
-                                </argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
