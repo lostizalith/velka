@@ -20,8 +20,13 @@
 
     <properties>
         <java.version>11</java.version>
+
+        <!-- dependencies -->
         <lombok.version>1.18.4</lombok.version>
+        <commons-lang3.version>3.8.1</commons-lang3.version>
         <maven-compiler.version>3.8.0</maven-compiler.version>
+
+        <!-- plugins -->
         <asm.version>7.0</asm.version>
         <maven-surefire.version>3.0.0-M3</maven-surefire.version>
         <maven-failsafe.version>3.0.0-M3</maven-failsafe.version>
@@ -35,11 +40,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
 
         <!-- Test scope -->
@@ -73,7 +85,9 @@
                     <!-- this helps when getting error: file should be on source path, or on patch path for module -->
                     <compilerArgs>
                         <arg>-sourcepath</arg>
-                        <arg>${project.basedir}/src/main/java${path.separator}${project.basedir}/target/generated-sources/annotations${path.separator}/</arg>
+                        <arg>
+                            ${project.basedir}/src/main/java${path.separator}${project.basedir}/target/generated-sources/annotations${path.separator}/
+                        </arg>
                     </compilerArgs>
                 </configuration>
                 <dependencies>
