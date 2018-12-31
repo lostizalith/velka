@@ -1,6 +1,8 @@
 # velka
 Financial Budget Instrument
 
+[![Build Status](https://travis-ci.com/lostizalith/velka.svg?branch=master)](https://travis-ci.com/lostizalith/velka)
+
 ## Run
 
 ```sh
