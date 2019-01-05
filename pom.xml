@@ -79,6 +79,7 @@
         <maven-failsafe.version>3.0.0-M3</maven-failsafe.version>
         <jacoco-maven.version>0.8.2</jacoco-maven.version>
         <coveralls-maven.version>4.3.0</coveralls-maven.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
     </properties>
 
     <dependencies>
@@ -261,6 +262,19 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>${coveralls-maven.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                        <version>${jaxb-api.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <jacocoReports>
+                        <jacocoReport>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</jacocoReport>
+                        <jacocoReport>${project.reporting.outputDirectory}/jacoco-it/jacoco.xml</jacocoReport>
+                    </jacocoReports>
+                </configuration>
             </plugin>
         </plugins>
     </build>
