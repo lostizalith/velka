@@ -2,12 +2,19 @@ package com.github.lostizalith.velka.record;
 
 import lombok.Data;
 
-@Data
-public class Record {
+import java.util.UUID;
 
-    private String id;
+@Data
+public class RecordEntity {
+
+    private UUID id = UUID.randomUUID();
+
     private String memo;
+
     private String date;
+
+    // TODO: record type instead and some field like value
     private String income;
+
     private String expense;
 }
