@@ -5,13 +5,18 @@ Financial Budget Instrument
 
 ## Run
 
-```sh
+```bash
 mvn spring-boot:run
+```
 
-or
+## Run Unit tests
 
-mvn clean package
+```bash
+mvn clean test -P dev
+```
 
-java --add-opens java.base/java.lang=spring.core \ 
---module-path=target/modules --module velka
+## Run Integration tests
+
+```bash
+mvn clean verify -P integration-test
 ```
