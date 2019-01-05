@@ -12,11 +12,17 @@ mvn spring-boot:run
 ## Run Unit tests
 
 ```bash
-mvn clean test -P dev
+mvn clean test
 ```
 
 ## Run Integration tests
 
 ```bash
 mvn clean verify -P integration-test
+```
+
+## Run all tests
+
+```bash
+mvn clean verify -P all-tests
 ```
