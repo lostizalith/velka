@@ -78,6 +78,7 @@
         <maven-surefire.version>3.0.0-M3</maven-surefire.version>
         <maven-failsafe.version>3.0.0-M3</maven-failsafe.version>
         <jacoco-maven.version>0.8.2</jacoco-maven.version>
+        <coveralls-maven.version>4.3.0</coveralls-maven.version>
     </properties>
 
     <dependencies>
@@ -254,6 +255,12 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eluder.coveralls</groupId>
+                <artifactId>coveralls-maven-plugin</artifactId>
+                <version>${coveralls-maven.version}</version>
             </plugin>
         </plugins>
     </build>
