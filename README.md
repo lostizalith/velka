@@ -31,9 +31,18 @@ mvn clean verify -P all-tests
 ## Run coveralls
 
 ```bash
-mvn clean test jacoco:report coveralls:report -DrepoToken=token
+export REPO_TOKEN=token
+mvn clean test jacoco:report coveralls:report -DrepoToken=$REPO_TOKEN
+```
+
+or 
+
+```bash
+export REPO_TOKEN=token
+mvn clean isntall
+mvn coveralls:report -DrepoToken=$REPO_TOKEN
 ```
 
 ## Contribute
 
-add `close #issue number` in pull request
+add `close #issue` in pull request
