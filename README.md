@@ -3,6 +3,7 @@ Financial Budget Instrument
 
 [![Build Status](https://travis-ci.com/lostizalith/velka.svg?branch=master)](https://travis-ci.com/lostizalith/velka)
 [![Coverage Status](https://coveralls.io/repos/github/lostizalith/velka/badge.svg?branch=%2349-integrate-coveralls-with-jacoco)](https://coveralls.io/github/lostizalith/velka?branch=%2349-integrate-coveralls-with-jacoco)
+[![DepShield Badge](https://depshield.sonatype.org/badges/lostizalith/velka/depshield.svg)](https://depshield.github.io)
 
 ## Run
 
