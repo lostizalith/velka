@@ -47,13 +47,13 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                  defaultValueComputed: now()
+                  defaultValueComputed: NOW()
                   name: a_created
                   type: TIMESTAMP
               - column:
                   constraints:
                     nullable: false
-                  defaultValueComputed: now()
+                  defaultValueComputed: NOW()
                   name: a_modified
                   type: TIMESTAMP
               - column:
