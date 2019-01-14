@@ -1,7 +1,9 @@
 package com.github.lostizalith.velka.account;
 
+import com.github.lostizalith.velka.record.RecordEntity;
 import lombok.Data;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -19,9 +21,9 @@ public class AccountEntity {
 
     private AccountCurrency currency;
 
-    // TODO: CashFlow?
+    private List<RecordEntity> records;
 
-    // TODO: records
+    // TODO: CashFlow?
 
     // TODO: accounter name
 }

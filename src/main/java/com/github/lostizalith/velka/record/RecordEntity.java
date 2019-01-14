@@ -17,4 +17,13 @@ public class RecordEntity {
     private String income;
 
     private String expense;
+
+    // TODO: combined id?
+    // TODO: one to one only
+    private UUID categoryId;
+
+    // TODO: to response entities
+    private String categoryName;
+
+    private String internalCategoryName;
 }
