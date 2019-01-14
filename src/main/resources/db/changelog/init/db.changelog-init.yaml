@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - property:
+      name: uuid_function
+      dbms: postgresql
+      value: public.uuid_generate_v4()
+
+  - changeSet:
+      id: initiate-schema
+      author: solairerove@gamil.com
+      changes:
+        - sqlFile:
+            dbms: postgresql
+            path: sql/init-schema-postgres.sql
+            stripComments: true
+            runOnChange: true
+            endDelimiter: '|'
+            relativeToChangelogFile: true

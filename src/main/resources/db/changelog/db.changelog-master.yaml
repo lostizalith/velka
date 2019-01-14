@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - include:
+      file: init/db.changelog-init.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: category/db.changelog-category.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: internal-category/db.changelog-internal-category.yaml
+      relativeToChangelogFile: true

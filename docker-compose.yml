@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  postgres:
+    container_name: velka-postgres
+    image: postgres:11.1-alpine
+    ports:
+      - "5432:5432"
+    networks:
+      - velka
+    environment:
+      - POSTGRES_DB=velka
+      - POSTGRES_USER=velka_user
+      - POSTGRES_PASSWORD=testpwd
+
+networks:
+  velka:
+    driver: bridge

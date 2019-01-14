@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: init_category_table
+      author: solairerove@gmail.com
+      changes:
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_category
+                  name: c_id
+                  type: uuid
+              - column:
+                  constraints:
+                    nullable: false
+                  name: c_display_name
+                  type: VARCHAR(64)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: c_icon
+                  type: TEXT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: c_created
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: c_modified
+                  type: TIMESTAMP
+              - column:
+                  name: c_deactivated
+                  type: TIMESTAMP
