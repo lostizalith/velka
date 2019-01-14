@@ -8,3 +8,9 @@ databaseChangeLog:
   - include:
       file: internal-category/db.changelog-internal-category.yaml
       relativeToChangelogFile: true
+  - include:
+      file: account/db.changelog-account.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: record/db.changelog-record.yaml
+      relativeToChangelogFile: true

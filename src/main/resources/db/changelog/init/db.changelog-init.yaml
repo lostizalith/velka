@@ -6,7 +6,7 @@ databaseChangeLog:
 
   - changeSet:
       id: initiate-schema
-      author: solairerove@gamil.com
+      author: solairerove@gmail.com
       changes:
         - sqlFile:
             dbms: postgresql

@@ -1,0 +1,69 @@
+databaseChangeLog:
+  - changeSet:
+      id: init_record_table
+      author: solairerove@gmail.com
+      changes:
+        - sql:
+            dbms: postgresql
+            endDelimiter: \nGO
+            splitStatements: true
+            sql: CREATE TYPE RECORD_TYPE AS ENUM ('INCOME', 'OUTCOME', 'TRANSFER');
+            stripComments: true
+        - createTable:
+            tableName: record
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_record
+                  name: r_id
+                  type: uuid
+              - column:
+                  name: r_memo
+                  type: VARCHAR(256)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: r_type
+                  type: RECORD_TYPE
+              - column:
+                  name: r_flow
+                  type: FLOAT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: r_created
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: r_modified
+                  type: TIMESTAMP
+              - column:
+                  name: r_deactivated
+                  type: TIMESTAMP
+              - column:
+                  name: ic_id
+                  type: uuid
+              - column:
+                  name: a_id
+                  type: uuid
+        - addForeignKeyConstraint:
+            baseColumnNames: ic_id
+            baseTableName: record
+            constraintName: fk_record_internal_category
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: ic_id
+            referencedTableName: internal_category
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: a_id
+            baseTableName: record
+            constraintName: fk_record_account
+            referencedColumnNames: a_id
+            referencedTableName: account
