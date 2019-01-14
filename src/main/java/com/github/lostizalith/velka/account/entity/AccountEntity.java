@@ -16,6 +16,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -32,6 +33,7 @@ public class AccountEntity implements Persistable<UUID> {
 
     @EqualsAndHashCode.Exclude
     @Id
+    @GeneratedValue
     @Column(name = "a_id", nullable = false)
     private UUID id = UUID.randomUUID();
 

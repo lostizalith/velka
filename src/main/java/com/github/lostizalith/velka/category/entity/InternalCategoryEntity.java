@@ -1,6 +1,5 @@
 package com.github.lostizalith.velka.category.entity;
 
-import com.github.lostizalith.velka.category.entity.CategoryEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -10,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,6 +24,7 @@ public class InternalCategoryEntity {
 
     @EqualsAndHashCode.Exclude
     @Id
+    @GeneratedValue
     @Column(name = "ic_id", nullable = false)
     private UUID id;
 

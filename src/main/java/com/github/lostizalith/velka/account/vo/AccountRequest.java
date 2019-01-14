@@ -20,6 +20,4 @@ public class AccountRequest {
 
     @JsonProperty(value = "currency")
     private String currency;
-
-//    private List<RecordEntity> records;
 }

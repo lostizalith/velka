@@ -3,7 +3,7 @@ version: "3"
 services:
   postgres:
     container_name: velka-postgres
-    image: postgres:11.1-alpine
+    image: postgres:9.5-alpine
     ports:
       - "5432:5432"
     networks:

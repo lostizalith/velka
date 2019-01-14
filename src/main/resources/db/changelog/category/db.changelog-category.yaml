@@ -37,3 +37,24 @@ databaseChangeLog:
               - column:
                   name: c_deactivated
                   type: TIMESTAMP
+  - changeSet:
+      id: add_default_value_to_primary_key
+      author: solairerove@gmail.com
+      changes:
+        - addDefaultValue:
+            columnDataType: uuid
+            columnName: c_id
+            defaultValueComputed: uuid_generate_v4()
+            tableName: category
+  - changeSet:
+      id: drop_not_null_constraints_dates
+      author: solairerove@gmail.com
+      changes:
+        - dropNotNullConstraint:
+            columnDataType: TIMESTAMP
+            columnName: c_created
+            tableName: category
+        - dropNotNullConstraint:
+            columnDataType: TIMESTAMP
+            columnName: c_modified
+            tableName: category

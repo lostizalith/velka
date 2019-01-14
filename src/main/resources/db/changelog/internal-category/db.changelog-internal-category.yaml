@@ -48,3 +48,24 @@ databaseChangeLog:
             constraintName: fk_internal_category_category
             referencedColumnNames: c_id
             referencedTableName: category
+  - changeSet:
+      id: add_default_value_to_primary_key_internal_category
+      author: solairerove@gmail.com
+      changes:
+        - addDefaultValue:
+            columnDataType: uuid
+            columnName: ic_id
+            defaultValueComputed: uuid_generate_v4()
+            tableName: internal_category
+  - changeSet:
+      id: drop_not_null_constraints_dates_internal_category
+      author: solairerove@gmail.com
+      changes:
+        - dropNotNullConstraint:
+            columnDataType: TIMESTAMP
+            columnName: ic_created
+            tableName: internal_category
+        - dropNotNullConstraint:
+            columnDataType: TIMESTAMP
+            columnName: ic_modified
+            tableName: internal_category
