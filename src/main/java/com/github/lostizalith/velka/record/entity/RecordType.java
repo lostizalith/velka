@@ -1,4 +1,4 @@
-package com.github.lostizalith.velka.record;
+package com.github.lostizalith.velka.record.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

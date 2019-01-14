@@ -1,6 +1,6 @@
-package com.github.lostizalith.velka.account;
+package com.github.lostizalith.velka.account.entity;
 
-import com.github.lostizalith.velka.record.RecordEntity;
+import com.github.lostizalith.velka.record.entity.RecordEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

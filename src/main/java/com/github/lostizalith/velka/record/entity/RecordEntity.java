@@ -1,7 +1,7 @@
-package com.github.lostizalith.velka.record;
+package com.github.lostizalith.velka.record.entity;
 
-import com.github.lostizalith.velka.account.AccountEntity;
-import com.github.lostizalith.velka.category.InternalCategoryEntity;
+import com.github.lostizalith.velka.account.entity.AccountEntity;
+import com.github.lostizalith.velka.category.entity.InternalCategoryEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

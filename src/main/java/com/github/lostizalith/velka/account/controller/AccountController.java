@@ -1,5 +1,6 @@
-package com.github.lostizalith.velka.account;
+package com.github.lostizalith.velka.account.controller;
 
+import com.github.lostizalith.velka.account.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

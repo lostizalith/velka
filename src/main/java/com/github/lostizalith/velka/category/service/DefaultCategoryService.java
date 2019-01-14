@@ -1,4 +1,4 @@
-package com.github.lostizalith.velka.category;
+package com.github.lostizalith.velka.category.service;
 
 import org.springframework.stereotype.Service;
 

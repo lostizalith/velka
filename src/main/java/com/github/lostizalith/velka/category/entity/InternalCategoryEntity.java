@@ -1,5 +1,6 @@
-package com.github.lostizalith.velka.category;
+package com.github.lostizalith.velka.category.entity;
 
+import com.github.lostizalith.velka.category.entity.CategoryEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

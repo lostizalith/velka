@@ -1,5 +1,6 @@
-package com.github.lostizalith.velka.category;
+package com.github.lostizalith.velka.record.controller;
 
+import com.github.lostizalith.velka.record.service.RecordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -8,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@RequestMapping(path = "/api/v1/categories", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-public class CategoryController {
+@RequestMapping(path = "/api/v1/records", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class RecordController {
 
-    private final CategoryService categoryService;
+    private final RecordService recordService;
 }

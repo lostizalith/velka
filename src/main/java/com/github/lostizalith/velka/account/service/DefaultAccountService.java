@@ -1,4 +1,4 @@
-package com.github.lostizalith.velka.account;
+package com.github.lostizalith.velka.account.service;
 
 import org.springframework.stereotype.Service;
 

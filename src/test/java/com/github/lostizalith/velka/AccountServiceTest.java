@@ -1,6 +1,6 @@
 package com.github.lostizalith.velka;
 
-import com.github.lostizalith.velka.account.AccountService;
+import com.github.lostizalith.velka.account.service.AccountService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
