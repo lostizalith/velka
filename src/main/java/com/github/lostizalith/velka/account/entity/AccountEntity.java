@@ -1,5 +1,6 @@
 package com.github.lostizalith.velka.account.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.lostizalith.velka.record.entity.RecordEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.Persistable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,12 +28,12 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "account")
-public class AccountEntity {
+public class AccountEntity implements Persistable<UUID> {
 
     @EqualsAndHashCode.Exclude
     @Id
     @Column(name = "a_id", nullable = false)
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     @Size(max = 64)
     @Column(name = "a_display_name")
@@ -73,4 +75,10 @@ public class AccountEntity {
     @EqualsAndHashCode.Exclude
     @Column(name = "a_deactivated", updatable = false, insertable = false)
     private LocalDateTime deactivated;
+
+    @JsonIgnore
+    @Override
+    public boolean isNew() {
+        return this.id == null;
+    }
 }

@@ -59,3 +59,27 @@ databaseChangeLog:
               - column:
                   name: a_deactivated
                   type: TIMESTAMP
+  - changeSet:
+      id: change_enum_types_to_var
+      author: solairerove@gmail.com
+      changes:
+        - modifyDataType:
+            columnName: a_type
+            newDataType: VARCHAR(16)
+            tableName: account
+        - modifyDataType:
+            columnName: a_currency
+            newDataType: VARCHAR(8)
+            tableName: account
+  - changeSet:
+      id: drop_not_null_constraints
+      author: solairerove@gmail.com
+      changes:
+        - dropNotNullConstraint:
+            columnDataType: TIMESTAMP
+            columnName: a_created
+            tableName: account
+        - dropNotNullConstraint:
+            columnDataType: TIMESTAMP
+            columnName: a_modified
+            tableName: account
