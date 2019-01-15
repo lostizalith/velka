@@ -17,9 +17,10 @@ before_install:
   - export PATH=$M2_HOME/bin:$PATH
 
 # check
-script: mvn clean install -P all-tests
+#script: mvn clean install -P all-tests
+script: mvn clean install
 
-after_success: mvn coveralls:report -DrepoToken=$REPO_TOKEN
+#after_success: mvn coveralls:report -DrepoToken=$REPO_TOKEN
 
 notifications:
   email:
