@@ -3,13 +3,14 @@ package com.github.lostizalith.velka.account.mapper;
 import com.github.lostizalith.velka.account.entity.AccountEntity;
 import com.github.lostizalith.velka.account.vo.AccountRequest;
 import com.github.lostizalith.velka.account.vo.AccountResponse;
+import com.github.lostizalith.velka.record.mapper.RecordMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
 import java.util.UUID;
 
-@Mapper(componentModel = "spring", imports = UUID.class)
+@Mapper(componentModel = "spring", imports = UUID.class, uses = RecordMapper.class)
 public interface AccountMapper {
 
     @Mappings({

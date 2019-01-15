@@ -1,7 +1,7 @@
 package com.github.lostizalith.velka.account.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.lostizalith.velka.record.entity.RecordEntity;
+import com.github.lostizalith.velka.record.vo.RecordResponse;
 import lombok.Data;
 
 import java.util.List;
@@ -27,5 +27,5 @@ public class AccountResponse {
     @JsonProperty(value = "currency")
     private String currency;
 
-    private List<RecordEntity> records;
+    private List<RecordResponse> records;
 }
