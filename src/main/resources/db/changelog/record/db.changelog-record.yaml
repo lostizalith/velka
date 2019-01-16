@@ -108,3 +108,13 @@ databaseChangeLog:
             columnDataType: TIMESTAMP
             columnName: r_modified
             tableName: record
+  - changeSet:
+      id: add_record_currency
+      author: solairerove@gmail.com
+      changes:
+        - addColumn:
+            tableName: record
+            columns:
+              - column:
+                  name: r_currency
+                  type: VARCHAR(8)

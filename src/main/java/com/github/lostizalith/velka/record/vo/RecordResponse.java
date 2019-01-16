@@ -14,5 +14,7 @@ public class RecordResponse {
 
     private Double flow;
 
+    private String currency;
+
     private InternalCategoryResponse internalCategory;
 }

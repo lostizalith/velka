@@ -11,5 +11,7 @@ public class RecordRequest {
 
     private Double flow;
 
+    private String currency;
+
     private String internalCategory;
 }

@@ -14,11 +14,13 @@ public interface RecordMapper {
 
     @Mappings({
         @Mapping(target = "internalCategory", source = "recordRequest.internalCategory", ignore = true),
+        @Mapping(target = "accountCurrency", source = "recordRequest.currency"),
     })
     RecordEntity recordRequestToRecordEntity(RecordRequest recordRequest);
 
     @Mappings({
         @Mapping(target = "id", expression = "java(recordEntity.getId().toString())"),
+        @Mapping(target = "currency", source = "recordEntity.accountCurrency"),
     })
     RecordResponse recordEntityToRecordResponse(RecordEntity recordEntity);
 

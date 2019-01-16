@@ -1,5 +1,6 @@
 package com.github.lostizalith.velka.record.entity;
 
+import com.github.lostizalith.velka.account.entity.AccountCurrency;
 import com.github.lostizalith.velka.account.entity.AccountEntity;
 import com.github.lostizalith.velka.category.entity.InternalCategoryEntity;
 import lombok.Data;
@@ -47,6 +48,11 @@ public class RecordEntity {
 
     @Column(name = "r_flow")
     private Double flow;
+
+    @NotNull
+    @Column(name = "r_currency")
+    @Enumerated(EnumType.STRING)
+    private AccountCurrency accountCurrency;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "ic_id")
