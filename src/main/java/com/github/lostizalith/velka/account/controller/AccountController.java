@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class AccountController {
     private final AccountService accountService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<AccountResponse> createAccount(@RequestBody final AccountRequest request) {
+    public ResponseEntity<AccountResponse> createAccount(@RequestBody @Valid final AccountRequest request) {
 
         final AccountEntity account = accountMapper.accountRequestToAccountEntity(request);
 
