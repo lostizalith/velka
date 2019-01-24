@@ -1,8 +1,9 @@
-package com.github.lostizalith.velka;
+package com.github.lostizalith.velka.account;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.lostizalith.velka.account.vo.AccountRequest;
 import org.hamcrest.CoreMatchers;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,12 +18,23 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.testcontainers.containers.GenericContainer;
+
+import static org.junit.Assert.assertTrue;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class AccountControllerIT {
 
+    private static final Integer ORIGINAL_PORT = 5432;
+
     private MockMvc mockMvc;
+
+    private GenericContainer postgresql = new GenericContainer("postgres:9.5-alpine")
+        .withExposedPorts(ORIGINAL_PORT)
+        .withEnv("POSTGRES_DB", "velka")
+        .withEnv("POSTGRES_USER", "velka_user")
+        .withEnv("POSTGRES_PASSWORD", "testpwd");
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -32,7 +44,14 @@ public class AccountControllerIT {
 
     @Before
     public void setUp() {
+        postgresql.start();
         mockMvc = MockMvcBuilders.webAppContextSetup(webAppConfiguration).build();
+    }
+
+    // TODO: use Jupiter extension
+    @After
+    public void after() {
+        postgresql.stop();
     }
 
     @Test
@@ -51,5 +70,10 @@ public class AccountControllerIT {
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
             .andExpect(MockMvcResultMatchers.jsonPath("$.status", CoreMatchers.is(400)))
             .andExpect(MockMvcResultMatchers.jsonPath("$.message", CoreMatchers.is("There's no such currency")));
+    }
+
+    @Test
+    public void test() {
+        assertTrue(postgresql.isRunning());
     }
 }
