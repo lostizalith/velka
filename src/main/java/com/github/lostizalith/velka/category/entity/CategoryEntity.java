@@ -7,10 +7,12 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -24,6 +26,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "category")
+@EntityListeners(AuditingEntityListener.class)
 public class CategoryEntity {
 
     @EqualsAndHashCode.Exclude
