@@ -364,21 +364,13 @@
                         <jacocoReport>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</jacocoReport>
                         <jacocoReport>${project.reporting.outputDirectory}/jacoco-it/jacoco.xml</jacocoReport>
                     </jacocoReports>
+                    <sourceDirectories>
+                        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+                        <sourceDirectory>${project.basedir}/target/generated-sources/annotations</sourceDirectory>
+                    </sourceDirectories>
                 </configuration>
             </plugin>
         </plugins>
-
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-
-            <resource>
-                <directory>src/integration-test/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
     </build>
 
     <repositories>
