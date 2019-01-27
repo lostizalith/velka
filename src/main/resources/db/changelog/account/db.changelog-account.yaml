@@ -94,7 +94,7 @@ databaseChangeLog:
             tableName: account
   - changeSet:
       id: rename_created_and_modified_columns_account
-      author: varashen.av@gmail.com
+      author: voroshen.av@gmail.com
       changes:
         - renameColumn:
             tableName: account

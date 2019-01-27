@@ -60,7 +60,7 @@ databaseChangeLog:
             tableName: category
   - changeSet:
       id: rename_created_and_modified_columns_category
-      author: varashen.av@gmail.com
+      author: voroshen.av@gmail.com
       changes:
         - renameColumn:
             tableName: category

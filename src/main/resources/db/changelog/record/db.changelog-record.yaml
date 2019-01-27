@@ -120,7 +120,7 @@ databaseChangeLog:
                   type: VARCHAR(8)
   - changeSet:
       id: rename_created_and_modified_columns_record
-      author: varashen.av@gmail.com
+      author: voroshen.av@gmail.com
       changes:
         - renameColumn:
             tableName: record
