@@ -7,6 +7,7 @@ import com.github.lostizalith.velka.account.vo.AccountRequest;
 import com.github.lostizalith.velka.account.vo.AccountResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,7 @@ public class AccountController {
 
         final AccountResponse response = accountMapper.accountEntityToAccountResponse(saved);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
