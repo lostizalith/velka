@@ -92,3 +92,15 @@ databaseChangeLog:
             columnName: a_id
             defaultValueComputed: uuid_generate_v4()
             tableName: account
+  - changeSet:
+      id: rename_created_and_modified_columns_account
+      author: varashen.av@gmail.com
+      changes:
+        - renameColumn:
+            tableName: account
+            oldColumnName: a_created
+            newColumnName: created
+        - renameColumn:
+            tableName: account
+            oldColumnName: a_modified
+            newColumnName: modified

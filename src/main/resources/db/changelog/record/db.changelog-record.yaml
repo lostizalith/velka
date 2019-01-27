@@ -118,3 +118,15 @@ databaseChangeLog:
               - column:
                   name: r_currency
                   type: VARCHAR(8)
+  - changeSet:
+      id: rename_created_and_modified_columns_record
+      author: varashen.av@gmail.com
+      changes:
+        - renameColumn:
+            tableName: record
+            oldColumnName: r_created
+            newColumnName: created
+        - renameColumn:
+            tableName: record
+            oldColumnName: r_modified
+            newColumnName: modified
