@@ -1,18 +1,21 @@
 package com.github.lostizalith.velka.account.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.lostizalith.velka.global.entity.Auditable;
 import com.github.lostizalith.velka.record.entity.RecordEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -26,10 +29,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "account")
-public class AccountEntity extends Auditable implements Persistable<UUID> {
+@EntityListeners(AuditingEntityListener.class)
+public class AccountEntity implements Persistable<UUID> {
 
     @EqualsAndHashCode.Exclude
     @Id
@@ -63,6 +66,16 @@ public class AccountEntity extends Auditable implements Persistable<UUID> {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SELECT)
     private List<RecordEntity> records;
+
+    @EqualsAndHashCode.Exclude
+    @CreatedDate
+    @Column(name = "a_created", updatable = false)
+    private LocalDateTime created;
+
+    @EqualsAndHashCode.Exclude
+    @LastModifiedDate
+    @Column(name = "a_modified")
+    private LocalDateTime modified;
 
     @EqualsAndHashCode.Exclude
     @Column(name = "a_deactivated", updatable = false, insertable = false)

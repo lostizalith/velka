@@ -69,15 +69,3 @@ databaseChangeLog:
             columnDataType: TIMESTAMP
             columnName: ic_modified
             tableName: internal_category
-  - changeSet:
-      id: rename_created_and_modified_columns_internal_category
-      author: voroshen.av@gmail.com
-      changes:
-        - renameColumn:
-            tableName: internal_category
-            oldColumnName: ic_created
-            newColumnName: created
-        - renameColumn:
-            tableName: internal_category
-            oldColumnName: ic_modified
-            newColumnName: modified

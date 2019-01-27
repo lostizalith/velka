@@ -58,15 +58,3 @@ databaseChangeLog:
             columnDataType: TIMESTAMP
             columnName: c_modified
             tableName: category
-  - changeSet:
-      id: rename_created_and_modified_columns_category
-      author: voroshen.av@gmail.com
-      changes:
-        - renameColumn:
-            tableName: category
-            oldColumnName: c_created
-            newColumnName: created
-        - renameColumn:
-            tableName: category
-            oldColumnName: c_modified
-            newColumnName: modified

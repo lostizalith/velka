@@ -3,14 +3,17 @@ package com.github.lostizalith.velka.record.entity;
 import com.github.lostizalith.velka.account.entity.AccountCurrency;
 import com.github.lostizalith.velka.account.entity.AccountEntity;
 import com.github.lostizalith.velka.category.entity.InternalCategoryEntity;
-import com.github.lostizalith.velka.global.entity.Auditable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -26,10 +29,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "record")
-public class RecordEntity extends Auditable {
+@EntityListeners(AuditingEntityListener.class)
+public class RecordEntity {
 
     @EqualsAndHashCode.Exclude
     @Id
@@ -63,6 +66,16 @@ public class RecordEntity extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "a_id")
     private AccountEntity account;
+
+    @EqualsAndHashCode.Exclude
+    @CreatedDate
+    @Column(name = "r_created", updatable = false)
+    private LocalDateTime created;
+
+    @EqualsAndHashCode.Exclude
+    @LastModifiedDate
+    @Column(name = "r_modified")
+    private LocalDateTime modified;
 
     @EqualsAndHashCode.Exclude
     @Column(name = "r_deactivated", updatable = false, insertable = false)

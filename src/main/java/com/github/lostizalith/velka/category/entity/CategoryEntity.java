@@ -1,15 +1,18 @@
 package com.github.lostizalith.velka.category.entity;
 
-import com.github.lostizalith.velka.global.entity.Auditable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -21,10 +24,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "category")
-public class CategoryEntity extends Auditable {
+@EntityListeners(AuditingEntityListener.class)
+public class CategoryEntity {
 
     @EqualsAndHashCode.Exclude
     @Id
@@ -44,6 +47,16 @@ public class CategoryEntity extends Auditable {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SELECT)
     private List<InternalCategoryEntity> internalCategories = new ArrayList<>();
+
+    @EqualsAndHashCode.Exclude
+    @CreatedDate
+    @Column(name = "c_created", updatable = false)
+    private LocalDateTime created;
+
+    @EqualsAndHashCode.Exclude
+    @LastModifiedDate
+    @Column(name = "c_modified")
+    private LocalDateTime modified;
 
     @EqualsAndHashCode.Exclude
     @Column(name = "c_deactivated", updatable = false, insertable = false)

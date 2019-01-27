@@ -1,12 +1,15 @@
 package com.github.lostizalith.velka.category.entity;
 
-import com.github.lostizalith.velka.global.entity.Auditable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,10 +20,10 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "internal_category")
-public class InternalCategoryEntity extends Auditable {
+@EntityListeners(AuditingEntityListener.class)
+public class InternalCategoryEntity {
 
     @EqualsAndHashCode.Exclude
     @Id
@@ -39,6 +42,16 @@ public class InternalCategoryEntity extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "c_id")
     private CategoryEntity category;
+
+    @EqualsAndHashCode.Exclude
+    @CreatedDate
+    @Column(name = "ic_created", updatable = false)
+    private LocalDateTime created;
+
+    @EqualsAndHashCode.Exclude
+    @LastModifiedDate
+    @Column(name = "ic_modified")
+    private LocalDateTime modified;
 
     @EqualsAndHashCode.Exclude
     @Column(name = "ic_deactivated", updatable = false, insertable = false)
