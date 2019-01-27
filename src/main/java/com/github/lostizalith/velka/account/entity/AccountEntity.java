@@ -10,10 +10,12 @@ import org.hibernate.annotations.FetchMode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "account")
+@EntityListeners(AuditingEntityListener.class)
 public class AccountEntity implements Persistable<UUID> {
 
     @EqualsAndHashCode.Exclude
