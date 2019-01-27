@@ -2,6 +2,9 @@ sudo: false
 
 language: java
 
+services:
+  - docker
+
 jdk:
   - openjdk11
   - oraclejdk11
@@ -15,6 +18,8 @@ before_install:
   - unzip -qq apache-maven-3.6.0-bin.zip
   - export M2_HOME=$PWD/apache-maven-3.6.0
   - export PATH=$M2_HOME/bin:$PATH
+  - mvn -v
+  - docker pull postgres:9.5-alpine
 
 script: mvn clean install -P all-tests
 

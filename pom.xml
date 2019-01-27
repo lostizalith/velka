@@ -58,11 +58,13 @@
 
         <!-- dependencies -->
         <liquibase-core.version>3.6.2</liquibase-core.version>
+        <ant.version>1.10.5</ant.version>
         <postgresql.version>42.2.5</postgresql.version>
         <lombok.version>1.18.4</lombok.version>
         <mapstruct.version>1.3.0.Beta2</mapstruct.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
+        <guava.version>27.0.1-jre</guava.version>
 
         <testcontainers.version>1.10.5</testcontainers.version>
 
@@ -83,7 +85,7 @@
         <build-helper.version>3.0.0</build-helper.version>
         <maven-surefire.version>3.0.0-M3</maven-surefire.version>
         <maven-failsafe.version>3.0.0-M3</maven-failsafe.version>
-        <jacoco-maven.version>0.8.2</jacoco-maven.version>
+        <jacoco-maven.version>0.8.3</jacoco-maven.version>
         <coveralls-maven.version>4.3.0</coveralls-maven.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
     </properties>
@@ -103,6 +105,18 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase-core.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>${ant.version}</version>
         </dependency>
 
         <dependency>
@@ -128,6 +142,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
             <version>${springfox-swagger2.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -140,6 +160,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
         <!-- Test scope -->
@@ -341,6 +367,18 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+
+            <resource>
+                <directory>src/integration-test/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <repositories>
