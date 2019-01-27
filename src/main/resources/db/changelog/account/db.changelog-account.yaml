@@ -1,0 +1,94 @@
+databaseChangeLog:
+  - changeSet:
+      id: init_account_table
+      author: solairerove@gmail.com
+      changes:
+        - sql:
+            dbms: postgresql
+            endDelimiter: \nGO
+            splitStatements: true
+            sql: CREATE TYPE ACCOUNT_TYPE AS ENUM ('DEBIT_CARD', 'CASH');
+            stripComments: true
+        - sql:
+            dbms: postgresql
+            endDelimiter: \nGO
+            splitStatements: true
+            sql: CREATE TYPE ACCOUNT_CURRENCY AS ENUM ('BYN', 'USD', 'EUR');
+            stripComments: true
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_account
+                  name: a_id
+                  type: uuid
+              - column:
+                  name: a_display_name
+                  type: VARCHAR(64)
+              - column:
+                  name: a_short_description
+                  type: VARCHAR(256)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: a_type
+                  defaultValue: DEBIT_CARD
+                  type: ACCOUNT_TYPE
+              - column:
+                  name: a_current_balance
+                  type: FLOAT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: a_currency
+                  type: ACCOUNT_CURRENCY
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: NOW()
+                  name: a_created
+                  type: TIMESTAMP
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: NOW()
+                  name: a_modified
+                  type: TIMESTAMP
+              - column:
+                  name: a_deactivated
+                  type: TIMESTAMP
+  - changeSet:
+      id: change_enum_types_to_var
+      author: solairerove@gmail.com
+      changes:
+        - modifyDataType:
+            columnName: a_type
+            newDataType: VARCHAR(16)
+            tableName: account
+        - modifyDataType:
+            columnName: a_currency
+            newDataType: VARCHAR(8)
+            tableName: account
+  - changeSet:
+      id: drop_not_null_constraints
+      author: solairerove@gmail.com
+      changes:
+        - dropNotNullConstraint:
+            columnDataType: TIMESTAMP
+            columnName: a_created
+            tableName: account
+        - dropNotNullConstraint:
+            columnDataType: TIMESTAMP
+            columnName: a_modified
+            tableName: account
+  - changeSet:
+      id: add_default_value_to_primary_key_account
+      author: solairerove@gmail.com
+      changes:
+        - addDefaultValue:
+            columnDataType: uuid
+            columnName: a_id
+            defaultValueComputed: uuid_generate_v4()
+            tableName: account
