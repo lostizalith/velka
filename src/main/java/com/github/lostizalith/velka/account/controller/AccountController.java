@@ -5,12 +5,14 @@ import com.github.lostizalith.velka.account.mapper.AccountMapper;
 import com.github.lostizalith.velka.account.service.AccountService;
 import com.github.lostizalith.velka.account.vo.AccountRequest;
 import com.github.lostizalith.velka.account.vo.AccountResponse;
+import com.github.lostizalith.velka.global.error.ErrorResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-@RequestMapping(value = "api/v1/accounts", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "api/v1/accounts",
+    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class AccountController {
 
     private final AccountMapper accountMapper;
@@ -49,5 +52,13 @@ public class AccountController {
             .collect(Collectors.toList());
 
         return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ErrorResponse> getAccountById(@PathVariable("id") final String id) {
+        final ErrorResponse errorResponse = ErrorResponse
+            .aErrorResponse(HttpStatus.NOT_IMPLEMENTED.value(), "Not implemented yet");
+
+        return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).body(errorResponse);
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Collections;
+import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.isA;
@@ -90,6 +91,16 @@ public class AccountControllerIT extends AbstractIntegrationTest {
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.status", is(400)))
             .andExpect(jsonPath("$.message", is("There's no such currency")));
+    }
+
+    @Test
+    public void getAccountById_expectNotImplementedYet() throws Exception {
+        final String randomId = UUID.randomUUID().toString();
+
+        mockMvc.perform(request(GET, String.format("/api/v1/accounts/%s", randomId)))
+            .andDo(print())
+            .andExpect(status().isNotImplemented())
+            .andExpect(jsonPath("$.message", is("Not implemented yet")));
     }
 
     @Test
