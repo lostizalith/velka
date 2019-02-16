@@ -1,7 +1,7 @@
-package com.github.lostizalith.velka.global.handler;
+package com.github.lostizalith.velka.common.handler;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.github.lostizalith.velka.global.error.ErrorResponse;
+import com.github.lostizalith.velka.common.error.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;

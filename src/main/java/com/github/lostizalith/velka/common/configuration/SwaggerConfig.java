@@ -1,4 +1,4 @@
-package com.github.lostizalith.velka.global.configuration;
+package com.github.lostizalith.velka.common.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
 package com.github.lostizalith.velka.account.validator;
 
 import com.github.lostizalith.velka.account.entity.AccountCurrency;
-import com.github.lostizalith.velka.global.utils.EnumParser;
+import com.github.lostizalith.velka.common.utils.EnumParser;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

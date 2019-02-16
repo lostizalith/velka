@@ -25,6 +25,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,7 +66,7 @@ public class AccountEntity implements Persistable<UUID> {
     @ToString.Exclude
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SELECT)
-    private List<RecordEntity> records;
+    private List<RecordEntity> records = new ArrayList<>();
 
     @EqualsAndHashCode.Exclude
     @CreatedDate
