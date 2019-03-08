@@ -17,14 +17,6 @@ public final class EnumParser {
         return findEnumValue(enumValues, Enum::name, value);
     }
 
-    public static <T extends Enum> Optional<T> findOptionalEnumValue(final T[] enumValues, final String value) {
-        final Function<T, String> valueExtractor = Enum::name;
-
-        return Stream.of(enumValues)
-            .filter(v -> valueExtractor.apply(v).equalsIgnoreCase(value))
-            .findFirst();
-    }
-
     public static <T extends Enum> T findEnumValue(final T[] enumValues,
                                                    final Function<T, String> valueExtractor,
                                                    final String value) {
@@ -44,10 +36,12 @@ public final class EnumParser {
                 enumValues[0].getClass().getSimpleName(), value, Arrays.toString(enumValues))));
     }
 
-    public static <T extends Enum> T findNullableEnumValue(final T[] enumValues, final String value,
-                                                           final Function<T, Collection<String>> enumValueOptionsExtractor) {
-        return findEnumOptionalValue(enumValues, value, enumValueOptionsExtractor)
-            .orElse(null);
+    public static <T extends Enum> Optional<T> findOptionalEnumValue(final T[] enumValues, final String value) {
+        final Function<T, String> valueExtractor = Enum::name;
+
+        return Stream.of(enumValues)
+            .filter(v -> valueExtractor.apply(v).equalsIgnoreCase(value))
+            .findFirst();
     }
 
     public static <T extends Enum> Optional<T> findEnumOptionalValue(final T[] enumValues, final String value,
@@ -58,5 +52,11 @@ public final class EnumParser {
                 .anyMatch(option -> option.toLowerCase(Locale.getDefault())
                     .equals(value.toLowerCase(Locale.getDefault()))))
             .findFirst();
+    }
+
+    public static <T extends Enum> T findNullableEnumValue(final T[] enumValues, final String value,
+                                                           final Function<T, Collection<String>> enumValueOptionsExtractor) {
+        return findEnumOptionalValue(enumValues, value, enumValueOptionsExtractor)
+            .orElse(null);
     }
 }
