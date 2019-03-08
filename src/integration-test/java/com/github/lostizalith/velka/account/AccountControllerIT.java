@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.lostizalith.velka.AbstractIntegrationTest;
 import com.github.lostizalith.velka.account.entity.AccountEntity;
 import com.github.lostizalith.velka.account.vo.AccountRequest;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,7 @@ import static com.github.lostizalith.velka.common.json.JsonMediaType.JSON_PATCH_
 import static com.github.lostizalith.velka.common.json.JsonMediaType.MERGE_PATCH_UTF8;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.isA;
+import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
@@ -95,6 +97,36 @@ public class AccountControllerIT extends AbstractIntegrationTest {
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.status", is(400)))
             .andExpect(jsonPath("$.message", is("There's no such currency")));
+    }
+
+    @Test
+    public void getAllAccount_checkCountBeforeAndAfter() throws Exception {
+        final MvcResult mvcResult = mockMvc.perform(request(GET, "/api/v1/accounts"))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andReturn();
+
+        final String contentAsString = mvcResult.getResponse().getContentAsString();
+
+        final int length = JsonPath
+            .parse(contentAsString)
+            .read("$.length()");
+
+        mockMvc.perform(request(POST, "/api/v1/accounts")
+            .contentType(APPLICATION_JSON_UTF8_VALUE)
+            .content(objectMapper.writeValueAsBytes(accountRequest)))
+            .andDo(print())
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.id", isA(String.class)))
+            .andExpect(jsonPath("$.displayName", is("Prior Bank")))
+            .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
+            .andExpect(jsonPath("$.currency", is("BYN")))
+            .andReturn();
+
+        mockMvc.perform(request(GET, "/api/v1/accounts"))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$", hasSize(length + 1)));
     }
 
     @Test
