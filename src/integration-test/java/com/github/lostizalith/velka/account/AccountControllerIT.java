@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -61,9 +62,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void createAccount_expectCreated() throws Exception {
-        final MvcResult mvcResult = mockMvc.perform(request(POST, "/api/v1/accounts")
-            .contentType(APPLICATION_JSON_UTF8_VALUE)
-            .content(objectMapper.writeValueAsBytes(accountRequest)))
+        final MvcResult mvcResult = performPostMockMvcRequest()
             .andDo(print())
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id", isA(String.class)))
@@ -90,9 +89,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
     public void createAccount_withNonExcitingCurrency_expectError() throws Exception {
         accountRequest.setCurrency("BYN1");
 
-        mockMvc.perform(request(POST, "/api/v1/accounts")
-            .contentType(APPLICATION_JSON_UTF8_VALUE)
-            .content(objectMapper.writeValueAsBytes(accountRequest)))
+        performPostMockMvcRequest()
             .andDo(print())
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.status", is(400)))
@@ -112,9 +109,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
             .parse(contentAsString)
             .read("$.length()");
 
-        mockMvc.perform(request(POST, "/api/v1/accounts")
-            .contentType(APPLICATION_JSON_UTF8_VALUE)
-            .content(objectMapper.writeValueAsBytes(accountRequest)))
+        performPostMockMvcRequest()
             .andDo(print())
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id", isA(String.class)))
@@ -131,9 +126,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void getAccountById_expectAccount() throws Exception {
-        final MvcResult mvcResult = mockMvc.perform(request(POST, "/api/v1/accounts")
-            .contentType(APPLICATION_JSON_UTF8_VALUE)
-            .content(objectMapper.writeValueAsBytes(accountRequest)))
+        final MvcResult mvcResult = performPostMockMvcRequest()
             .andDo(print())
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id", isA(String.class)))
@@ -168,9 +161,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void putAccount_expectUpdatedEntity() throws Exception {
-        final MvcResult mvcResult = mockMvc.perform(request(POST, "/api/v1/accounts")
-            .contentType(APPLICATION_JSON_UTF8_VALUE)
-            .content(objectMapper.writeValueAsBytes(accountRequest)))
+        final MvcResult mvcResult = performPostMockMvcRequest()
             .andDo(print())
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id", isA(String.class)))
@@ -198,9 +189,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void putAccount_expectUpdatedEntity_byGetByIdEndpoint() throws Exception {
-        final MvcResult mvcResult = mockMvc.perform(request(POST, "/api/v1/accounts")
-            .contentType(APPLICATION_JSON_UTF8_VALUE)
-            .content(objectMapper.writeValueAsBytes(accountRequest)))
+        final MvcResult mvcResult = performPostMockMvcRequest()
             .andDo(print())
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id", isA(String.class)))
@@ -261,9 +250,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void deleteAccount_expectDeletedAccount() throws Exception {
-        final MvcResult mvcResult = mockMvc.perform(request(POST, "/api/v1/accounts")
-            .contentType(APPLICATION_JSON_UTF8_VALUE)
-            .content(objectMapper.writeValueAsBytes(accountRequest)))
+        final MvcResult mvcResult = performPostMockMvcRequest()
             .andDo(print())
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id", isA(String.class)))
@@ -288,9 +275,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void deleteAccount_expectErrorResponseWhenGetById() throws Exception {
-        final MvcResult mvcResult = mockMvc.perform(request(POST, "/api/v1/accounts")
-            .contentType(APPLICATION_JSON_UTF8_VALUE)
-            .content(objectMapper.writeValueAsBytes(accountRequest)))
+        final MvcResult mvcResult = performPostMockMvcRequest()
             .andDo(print())
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id", isA(String.class)))
@@ -345,5 +330,11 @@ public class AccountControllerIT extends AbstractIntegrationTest {
     @Test
     public void test() {
         assertTrue(POSTGRES.isRunning());
+    }
+
+    private ResultActions performPostMockMvcRequest() throws Exception {
+        return mockMvc.perform(request(POST, "/api/v1/accounts")
+            .contentType(APPLICATION_JSON_UTF8_VALUE)
+            .content(objectMapper.writeValueAsBytes(accountRequest)));
     }
 }
