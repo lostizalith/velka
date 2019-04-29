@@ -62,14 +62,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void createAccount_expectCreated() throws Exception {
-        final MvcResult mvcResult = performPostMockMvcRequest()
-            .andDo(print())
-            .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.id", isA(String.class)))
-            .andExpect(jsonPath("$.displayName", is("Prior Bank")))
-            .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
-            .andExpect(jsonPath("$.currency", is("BYN")))
-            .andReturn();
+        final MvcResult mvcResult = performPostRequestAndReturn();
 
         final String contentAsString = mvcResult.getResponse().getContentAsString();
         final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
@@ -89,8 +82,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
     public void createAccount_withNonExcitingCurrency_expectError() throws Exception {
         accountRequest.setCurrency("BYN1");
 
-        performPostMockMvcRequest()
-            .andDo(print())
+        performPostRequest()
             .andExpect(status().isBadRequest())
             .andExpect(jsonPath("$.status", is(400)))
             .andExpect(jsonPath("$.message", is("There's no such currency")));
@@ -109,14 +101,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
             .parse(contentAsString)
             .read("$.length()");
 
-        performPostMockMvcRequest()
-            .andDo(print())
-            .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.id", isA(String.class)))
-            .andExpect(jsonPath("$.displayName", is("Prior Bank")))
-            .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
-            .andExpect(jsonPath("$.currency", is("BYN")))
-            .andReturn();
+        performPostRequestAndReturn();
 
         mockMvc.perform(request(GET, "/api/v1/accounts"))
             .andDo(print())
@@ -126,14 +111,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void getAccountById_expectAccount() throws Exception {
-        final MvcResult mvcResult = performPostMockMvcRequest()
-            .andDo(print())
-            .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.id", isA(String.class)))
-            .andExpect(jsonPath("$.displayName", is("Prior Bank")))
-            .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
-            .andExpect(jsonPath("$.currency", is("BYN")))
-            .andReturn();
+        final MvcResult mvcResult = performPostRequestAndReturn();
 
         final String contentAsString = mvcResult.getResponse().getContentAsString();
         final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
@@ -161,14 +139,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void putAccount_expectUpdatedEntity() throws Exception {
-        final MvcResult mvcResult = performPostMockMvcRequest()
-            .andDo(print())
-            .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.id", isA(String.class)))
-            .andExpect(jsonPath("$.displayName", is("Prior Bank")))
-            .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
-            .andExpect(jsonPath("$.currency", is("BYN")))
-            .andReturn();
+        final MvcResult mvcResult = performPostRequestAndReturn();
 
         final String contentAsString = mvcResult.getResponse().getContentAsString();
         final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
@@ -189,14 +160,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void putAccount_expectUpdatedEntity_byGetByIdEndpoint() throws Exception {
-        final MvcResult mvcResult = performPostMockMvcRequest()
-            .andDo(print())
-            .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.id", isA(String.class)))
-            .andExpect(jsonPath("$.displayName", is("Prior Bank")))
-            .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
-            .andExpect(jsonPath("$.currency", is("BYN")))
-            .andReturn();
+        final MvcResult mvcResult = performPostRequestAndReturn();
 
         final String contentAsString = mvcResult.getResponse().getContentAsString();
         final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
@@ -250,14 +214,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void deleteAccount_expectDeletedAccount() throws Exception {
-        final MvcResult mvcResult = performPostMockMvcRequest()
-            .andDo(print())
-            .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.id", isA(String.class)))
-            .andExpect(jsonPath("$.displayName", is("Prior Bank")))
-            .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
-            .andExpect(jsonPath("$.currency", is("BYN")))
-            .andReturn();
+        final MvcResult mvcResult = performPostRequestAndReturn();
 
         final String contentAsString = mvcResult.getResponse().getContentAsString();
         final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
@@ -275,14 +232,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void deleteAccount_expectErrorResponseWhenGetById() throws Exception {
-        final MvcResult mvcResult = performPostMockMvcRequest()
-            .andDo(print())
-            .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.id", isA(String.class)))
-            .andExpect(jsonPath("$.displayName", is("Prior Bank")))
-            .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
-            .andExpect(jsonPath("$.currency", is("BYN")))
-            .andReturn();
+        final MvcResult mvcResult = performPostRequestAndReturn();
 
         final String contentAsString = mvcResult.getResponse().getContentAsString();
         final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
@@ -332,9 +282,20 @@ public class AccountControllerIT extends AbstractIntegrationTest {
         assertTrue(POSTGRES.isRunning());
     }
 
-    private ResultActions performPostMockMvcRequest() throws Exception {
+    private ResultActions performPostRequest() throws Exception{
         return mockMvc.perform(request(POST, "/api/v1/accounts")
             .contentType(APPLICATION_JSON_UTF8_VALUE)
-            .content(objectMapper.writeValueAsBytes(accountRequest)));
+            .content(objectMapper.writeValueAsBytes(accountRequest)))
+            .andDo(print());
+    }
+
+    private MvcResult performPostRequestAndReturn() throws Exception {
+        return performPostRequest()
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.id", isA(String.class)))
+            .andExpect(jsonPath("$.displayName", is("Prior Bank")))
+            .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
+            .andExpect(jsonPath("$.currency", is("BYN")))
+            .andReturn();
     }
 }
