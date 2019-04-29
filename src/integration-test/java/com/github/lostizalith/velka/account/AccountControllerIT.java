@@ -62,12 +62,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void createAccount_expectCreated() throws Exception {
-        final MvcResult mvcResult = performPostRequestAndReturn();
-
-        final String contentAsString = mvcResult.getResponse().getContentAsString();
-        final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
-
-        final String savedId = accountEntity.getId().toString();
+        final String savedId = performPostRequestAndReturnEntity();
 
         mockMvc.perform(request(GET, String.format("/api/v1/accounts/%s", savedId)))
             .andDo(print())
@@ -111,12 +106,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void getAccountById_expectAccount() throws Exception {
-        final MvcResult mvcResult = performPostRequestAndReturn();
-
-        final String contentAsString = mvcResult.getResponse().getContentAsString();
-        final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
-
-        final String savedId = accountEntity.getId().toString();
+        final String savedId = performPostRequestAndReturnEntity();
 
         mockMvc.perform(request(GET, String.format("/api/v1/accounts/%s", savedId)))
             .andDo(print())
@@ -139,12 +129,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void putAccount_expectUpdatedEntity() throws Exception {
-        final MvcResult mvcResult = performPostRequestAndReturn();
-
-        final String contentAsString = mvcResult.getResponse().getContentAsString();
-        final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
-
-        final String savedId = accountEntity.getId().toString();
+        final String savedId = performPostRequestAndReturnEntity();
 
         accountRequest.setCurrency("USD");
         accountRequest.setAccountType("CASH");
@@ -160,12 +145,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void putAccount_expectUpdatedEntity_byGetByIdEndpoint() throws Exception {
-        final MvcResult mvcResult = performPostRequestAndReturn();
-
-        final String contentAsString = mvcResult.getResponse().getContentAsString();
-        final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
-
-        final String savedId = accountEntity.getId().toString();
+        final String savedId = performPostRequestAndReturnEntity();
 
         accountRequest.setCurrency("USD");
         accountRequest.setAccountType("CASH");
@@ -214,12 +194,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void deleteAccount_expectDeletedAccount() throws Exception {
-        final MvcResult mvcResult = performPostRequestAndReturn();
-
-        final String contentAsString = mvcResult.getResponse().getContentAsString();
-        final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
-
-        final String savedId = accountEntity.getId().toString();
+        final String savedId = performPostRequestAndReturnEntity();
 
         mockMvc.perform(request(DELETE, String.format("/api/v1/accounts/%s", savedId)))
             .andDo(print())
@@ -232,12 +207,7 @@ public class AccountControllerIT extends AbstractIntegrationTest {
 
     @Test
     public void deleteAccount_expectErrorResponseWhenGetById() throws Exception {
-        final MvcResult mvcResult = performPostRequestAndReturn();
-
-        final String contentAsString = mvcResult.getResponse().getContentAsString();
-        final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
-
-        final String savedId = accountEntity.getId().toString();
+        final String savedId = performPostRequestAndReturnEntity();
 
         mockMvc.perform(request(DELETE, String.format("/api/v1/accounts/%s", savedId)))
             .andDo(print())
@@ -297,5 +267,14 @@ public class AccountControllerIT extends AbstractIntegrationTest {
             .andExpect(jsonPath("$.accountType", is("DEBIT_CARD")))
             .andExpect(jsonPath("$.currency", is("BYN")))
             .andReturn();
+    }
+
+    private String performPostRequestAndReturnEntity() throws Exception {
+        MvcResult mvcResult = performPostRequestAndReturn();
+
+        final String contentAsString = mvcResult.getResponse().getContentAsString();
+        final AccountEntity accountEntity = objectMapper.readValue(contentAsString, AccountEntity.class);
+
+        return accountEntity.getId().toString();
     }
 }
