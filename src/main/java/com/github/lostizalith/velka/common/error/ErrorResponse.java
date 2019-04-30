@@ -1,4 +1,4 @@
-package com.github.lostizalith.velka.global.error;
+package com.github.lostizalith.velka.common.error;
 
 import lombok.Value;
 
