@@ -57,7 +57,7 @@
         <java.version>11</java.version>
 
         <!-- dependencies -->
-        <liquibase-core.version>3.6.3</liquibase-core.version>
+        <liquibase-core.version>3.7.0</liquibase-core.version>
         <ant.version>1.10.6</ant.version>
         <postgresql.version>42.2.5</postgresql.version>
         <lombok.version>1.18.8</lombok.version>
