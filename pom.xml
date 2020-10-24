@@ -62,9 +62,9 @@
         <postgresql.version>42.2.6</postgresql.version>
         <lombok.version>1.18.8</lombok.version>
         <mapstruct.version>1.3.0.Final</mapstruct.version>
-        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <springfox-swagger2.version>2.10.0</springfox-swagger2.version>
         <commons-lang3.version>3.9</commons-lang3.version>
-        <guava.version>28.0-jre</guava.version>
+        <guava.version>30.0-android</guava.version>
 
         <testcontainers.version>1.12.0</testcontainers.version>
 
